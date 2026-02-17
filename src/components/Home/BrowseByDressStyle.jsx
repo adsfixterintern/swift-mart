@@ -24,7 +24,7 @@ export default function BrowseByDressStyle() {
                 className="object-cover"
               />
               <h3 className="absolute top-6 left-6 text-xl font-semibold">
-                Casual
+                Casual bszx
               </h3>
             </div>
 
