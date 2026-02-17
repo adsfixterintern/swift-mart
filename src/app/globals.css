@@ -52,20 +52,18 @@
 
 
 
+.brand-versace,
+.brand-zara,
+.brand-gucci,
+.brand-prada {
+  font-family: 'Playfair Display', serif;
+  letter-spacing: 0.15em;
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+.brand-calvin {
+  font-family: 'Montserrat', sans-serif;
+  letter-spacing: 0.05em;
+}
 
 
 
