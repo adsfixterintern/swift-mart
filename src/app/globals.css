@@ -6,6 +6,9 @@
   --color-secondary: rgba(0, 0, 0, 0.6);
   --color-tertiary: #F0F0F0;
 }
+.bg-primary{
+  background-color: #F0F0F0;
+}
 /* section title  */
 .section-title {
   font-size: 48px;
