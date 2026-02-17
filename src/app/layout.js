@@ -1,6 +1,7 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { Toaster } from 'react-hot-toast';
+import { Toaster } from "react-hot-toast";
+import { ThemeProvider } from "@/context/ThemeContext";
 import ReactQueryProvider from "@/providers/ReactQueryProvider";
 import Footer from "@/components/shared/Footer";
 import Navbar from "@/components/shared/Navbar";
@@ -26,14 +27,15 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body
-      
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <Toaster position="top-center" reverseOrder={false} />
         <ReactQueryProvider>
-          <Navbar></Navbar>
-        {children}
-        <Footer></Footer>
+          <ThemeProvider>
+            <Navbar></Navbar>
+            {children}
+            <Footer></Footer>
+          </ThemeProvider>
         </ReactQueryProvider>
       </body>
     </html>
