@@ -1,0 +1,443 @@
+[
+  {
+    "id": 1,
+    "productName": "Classic Black T-Shirt",
+    "category": "t-shirt",
+    "ratings": 4.5,
+    "reviews": [
+      {
+        "personName": "Rahim Ahmed",
+        "rating": 5,
+        "review": "Fabric quality is excellent",
+        "postDate": "2025-01-12",
+        "cmd": "verified"
+      }
+    ],
+    "size": ["S", "M", "L", "XL"],
+    "color": ["Black"],
+    "discountPrice": 799,
+    "sellPrice": 999,
+    "productDetails": "Premium cotton t-shirt for daily wear.",
+    "images": [
+      "https://i.ibb.co/4gDzHPCS/Frame-32.png",
+      "https://i.ibb.co/KcdgK8ys/Frame-33.png",
+      "https://i.ibb.co/mVj1rm3v/Frame-34.png",
+      "https://i.ibb.co/bMZnWbQj/Frame-38.png"
+    ]
+  },
+  {
+    "id": 2,
+    "productName": "Oversized White T-Shirt",
+    "category": "t-shirt",
+    "ratings": 4.3,
+    "reviews": [
+      {
+        "personName": "Nabila Khan",
+        "rating": 4,
+        "review": "Very comfortable",
+        "postDate": "2025-01-10",
+        "cmd": "verified"
+      }
+    ],
+    "size": ["M", "L", "XL"],
+    "color": ["White"],
+    "discountPrice": 899,
+    "sellPrice": 1099,
+    "productDetails": "Trendy oversized t-shirt with soft fabric.",
+    "images": [
+      "https://i.ibb.co/xKZ8LKQZ/Frame-70.png",
+      "https://i.ibb.co/0jR6GzmV/Frame-71-1.png",
+      "https://i.ibb.co/67hjVHcq/Frame-71.png",
+      "https://i.ibb.co/v4BmnqRP/Frame-72.png"
+    ]
+  },
+  {
+    "id": 3,
+    "productName": "Formal White Shirt",
+    "category": "shirt",
+    "ratings": 4.6,
+    "reviews": [
+      {
+        "personName": "Imran Hossain",
+        "rating": 5,
+        "review": "Perfect for office",
+        "postDate": "2025-01-08",
+        "cmd": "verified"
+      }
+    ],
+    "size": ["M", "L", "XL"],
+    "color": ["White"],
+    "discountPrice": 1499,
+    "sellPrice": 1799,
+    "productDetails": "Slim-fit formal shirt with breathable fabric.",
+    "images": [
+      "https://i.ibb.co/Y4xy7Lc8/Frame-73.png",
+      "https://i.ibb.co/4gDzHPCS/Frame-32.png",
+      "https://i.ibb.co/KcdgK8ys/Frame-33.png",
+      "https://i.ibb.co/mVj1rm3v/Frame-34.png"
+    ]
+  },
+  {
+    "id": 4,
+    "productName": "Denim Blue Shirt",
+    "category": "shirt",
+    "ratings": 4.4,
+    "reviews": [
+      {
+        "personName": "Tanvir Hasan",
+        "rating": 4,
+        "review": "Looks premium",
+        "postDate": "2025-01-07",
+        "cmd": "verified"
+      }
+    ],
+    "size": ["S", "M", "L"],
+    "color": ["Blue"],
+    "discountPrice": 1699,
+    "sellPrice": 1999,
+    "productDetails": "Denim shirt with modern stitching.",
+    "images": [
+      "https://i.ibb.co/bMZnWbQj/Frame-38.png",
+      "https://i.ibb.co/xKZ8LKQZ/Frame-70.png",
+      "https://i.ibb.co/0jR6GzmV/Frame-71-1.png",
+      "https://i.ibb.co/67hjVHcq/Frame-71.png"
+    ]
+  },
+  {
+    "id": 5,
+    "productName": "Grey Sports Shorts",
+    "category": "shorts",
+    "ratings": 4.1,
+    "reviews": [
+      {
+        "personName": "Fahim Noor",
+        "rating": 4,
+        "review": "Good for gym",
+        "postDate": "2025-01-06",
+        "cmd": "verified"
+      }
+    ],
+    "size": ["M", "L", "XL"],
+    "color": ["Grey"],
+    "discountPrice": 699,
+    "sellPrice": 899,
+    "productDetails": "Lightweight sports shorts.",
+    "images": [
+      "https://i.ibb.co/v4BmnqRP/Frame-72.png",
+      "https://i.ibb.co/Y4xy7Lc8/Frame-73.png",
+      "https://i.ibb.co/4gDzHPCS/Frame-32.png",
+      "https://i.ibb.co/KcdgK8ys/Frame-33.png"
+    ]
+  },
+  {
+    "id": 6,
+    "productName": "Black Cotton Shorts",
+    "category": "shorts",
+    "ratings": 4.2,
+    "reviews": [
+      {
+        "personName": "Shuvo Das",
+        "rating": 4,
+        "review": "Nice fabric",
+        "postDate": "2025-01-05",
+        "cmd": "verified"
+      }
+    ],
+    "size": ["M", "L"],
+    "color": ["Black"],
+    "discountPrice": 749,
+    "sellPrice": 949,
+    "productDetails": "Comfortable cotton shorts.",
+    "images": [
+      "https://i.ibb.co/mVj1rm3v/Frame-34.png",
+      "https://i.ibb.co/bMZnWbQj/Frame-38.png",
+      "https://i.ibb.co/xKZ8LKQZ/Frame-70.png",
+      "https://i.ibb.co/0jR6GzmV/Frame-71-1.png"
+    ]
+  },
+  {
+    "id": 7,
+    "productName": "Black Winter Hoodie",
+    "category": "hoodie",
+    "ratings": 4.8,
+    "reviews": [
+      {
+        "personName": "Ayesha Rahman",
+        "rating": 5,
+        "review": "Very warm",
+        "postDate": "2025-01-04",
+        "cmd": "verified"
+      }
+    ],
+    "size": ["S", "M", "L", "XL"],
+    "color": ["Black"],
+    "discountPrice": 2499,
+    "sellPrice": 2999,
+    "productDetails": "Fleece hoodie for winter.",
+    "images": [
+      "https://i.ibb.co/67hjVHcq/Frame-71.png",
+      "https://i.ibb.co/v4BmnqRP/Frame-72.png",
+      "https://i.ibb.co/Y4xy7Lc8/Frame-73.png",
+      "https://i.ibb.co/4gDzHPCS/Frame-32.png"
+    ]
+  },
+  {
+    "id": 8,
+    "productName": "Grey Zipper Hoodie",
+    "category": "hoodie",
+    "ratings": 4.4,
+    "reviews": [
+      {
+        "personName": "Hasan Mahmud",
+        "rating": 4,
+        "review": "Good quality",
+        "postDate": "2025-01-03",
+        "cmd": "verified"
+      }
+    ],
+    "size": ["M", "L", "XL"],
+    "color": ["Grey"],
+    "discountPrice": 2399,
+    "sellPrice": 2799,
+    "productDetails": "Zipper hoodie with modern fit.",
+    "images": [
+      "https://i.ibb.co/KcdgK8ys/Frame-33.png",
+      "https://i.ibb.co/mVj1rm3v/Frame-34.png",
+      "https://i.ibb.co/bMZnWbQj/Frame-38.png",
+      "https://i.ibb.co/xKZ8LKQZ/Frame-70.png"
+    ]
+  },
+  {
+    "id": 9,
+    "productName": "Slim Fit Blue Jeans",
+    "category": "jeans",
+    "ratings": 4.7,
+    "reviews": [
+      {
+        "personName": "Nayeem Islam",
+        "rating": 5,
+        "review": "Perfect fitting",
+        "postDate": "2025-01-02",
+        "cmd": "verified"
+      }
+    ],
+    "size": ["30", "32", "34", "36"],
+    "color": ["Blue"],
+    "discountPrice": 2199,
+    "sellPrice": 2599,
+    "productDetails": "Stretch denim slim fit jeans.",
+    "images": [
+      "https://i.ibb.co/0jR6GzmV/Frame-71-1.png",
+      "https://i.ibb.co/67hjVHcq/Frame-71.png",
+      "https://i.ibb.co/v4BmnqRP/Frame-72.png",
+      "https://i.ibb.co/Y4xy7Lc8/Frame-73.png"
+    ]
+  },
+  {
+    "id": 10,
+    "productName": "Black Regular Jeans",
+    "category": "jeans",
+    "ratings": 4.5,
+    "reviews": [
+      {
+        "personName": "Shanto Roy",
+        "rating": 4,
+        "review": "Good denim",
+        "postDate": "2025-01-01",
+        "cmd": "verified"
+      }
+    ],
+    "size": ["30", "32", "34", "36"],
+    "color": ["Black"],
+    "discountPrice": 2299,
+    "sellPrice": 2799,
+    "productDetails": "Classic black regular fit jeans.",
+    "images": [
+      "https://i.ibb.co/4gDzHPCS/Frame-32.png",
+      "https://i.ibb.co/KcdgK8ys/Frame-33.png",
+      "https://i.ibb.co/mVj1rm3v/Frame-34.png",
+      "https://i.ibb.co/bMZnWbQj/Frame-38.png"
+    ]
+  },
+
+  {
+    "id": 11,
+    "productName": "Light Blue Jeans",
+    "category": "jeans",
+    "ratings": 4.3,
+    "reviews": [],
+    "size": ["30", "32", "34"],
+    "color": ["Light Blue"],
+    "discountPrice": 2099,
+    "sellPrice": 2499,
+    "productDetails": "Casual light wash jeans.",
+    "images": [
+      "https://i.ibb.co/xKZ8LKQZ/Frame-70.png",
+      "https://i.ibb.co/0jR6GzmV/Frame-71-1.png",
+      "https://i.ibb.co/67hjVHcq/Frame-71.png",
+      "https://i.ibb.co/v4BmnqRP/Frame-72.png"
+    ]
+  },
+  {
+    "id": 12,
+    "productName": "Printed T-Shirt",
+    "category": "t-shirt",
+    "ratings": 4.2,
+    "reviews": [],
+    "size": ["S", "M", "L"],
+    "color": ["Black", "White"],
+    "discountPrice": 899,
+    "sellPrice": 1199,
+    "productDetails": "Printed t-shirt with modern graphics.",
+    "images": [
+      "https://i.ibb.co/Y4xy7Lc8/Frame-73.png",
+      "https://i.ibb.co/4gDzHPCS/Frame-32.png",
+      "https://i.ibb.co/KcdgK8ys/Frame-33.png",
+      "https://i.ibb.co/mVj1rm3v/Frame-34.png"
+    ]
+  },
+  {
+    "id": 13,
+    "productName": "Casual Checked Shirt",
+    "category": "shirt",
+    "ratings": 4.1,
+    "reviews": [],
+    "size": ["M", "L", "XL"],
+    "color": ["Red"],
+    "discountPrice": 1599,
+    "sellPrice": 1899,
+    "productDetails": "Checked casual shirt for outings.",
+    "images": [
+      "https://i.ibb.co/bMZnWbQj/Frame-38.png",
+      "https://i.ibb.co/xKZ8LKQZ/Frame-70.png",
+      "https://i.ibb.co/0jR6GzmV/Frame-71-1.png",
+      "https://i.ibb.co/67hjVHcq/Frame-71.png"
+    ]
+  },
+  {
+    "id": 14,
+    "productName": "Summer Shorts",
+    "category": "shorts",
+    "ratings": 4.0,
+    "reviews": [],
+    "size": ["M", "L"],
+    "color": ["Navy"],
+    "discountPrice": 649,
+    "sellPrice": 849,
+    "productDetails": "Breathable summer shorts.",
+    "images": [
+      "https://i.ibb.co/v4BmnqRP/Frame-72.png",
+      "https://i.ibb.co/Y4xy7Lc8/Frame-73.png",
+      "https://i.ibb.co/4gDzHPCS/Frame-32.png",
+      "https://i.ibb.co/KcdgK8ys/Frame-33.png"
+    ]
+  },
+  {
+    "id": 15,
+    "productName": "Pullover Hoodie",
+    "category": "hoodie",
+    "ratings": 4.6,
+    "reviews": [],
+    "size": ["S", "M", "L"],
+    "color": ["Blue"],
+    "discountPrice": 2299,
+    "sellPrice": 2699,
+    "productDetails": "Pullover hoodie with soft lining.",
+    "images": [
+      "https://i.ibb.co/mVj1rm3v/Frame-34.png",
+      "https://i.ibb.co/bMZnWbQj/Frame-38.png",
+      "https://i.ibb.co/xKZ8LKQZ/Frame-70.png",
+      "https://i.ibb.co/0jR6GzmV/Frame-71-1.png"
+    ]
+  },
+  {
+    "id": 16,
+    "productName": "Ripped Blue Jeans",
+    "category": "jeans",
+    "ratings": 4.4,
+    "reviews": [],
+    "size": ["30", "32", "34"],
+    "color": ["Blue"],
+    "discountPrice": 2399,
+    "sellPrice": 2899,
+    "productDetails": "Trendy ripped denim jeans.",
+    "images": [
+      "https://i.ibb.co/67hjVHcq/Frame-71.png",
+      "https://i.ibb.co/v4BmnqRP/Frame-72.png",
+      "https://i.ibb.co/Y4xy7Lc8/Frame-73.png",
+      "https://i.ibb.co/4gDzHPCS/Frame-32.png"
+    ]
+  },
+  {
+    "id": 17,
+    "productName": "Basic Grey T-Shirt",
+    "category": "t-shirt",
+    "ratings": 4.1,
+    "reviews": [],
+    "size": ["S", "M", "L"],
+    "color": ["Grey"],
+    "discountPrice": 749,
+    "sellPrice": 949,
+    "productDetails": "Minimal grey cotton t-shirt.",
+    "images": [
+      "https://i.ibb.co/KcdgK8ys/Frame-33.png",
+      "https://i.ibb.co/mVj1rm3v/Frame-34.png",
+      "https://i.ibb.co/bMZnWbQj/Frame-38.png",
+      "https://i.ibb.co/xKZ8LKQZ/Frame-70.png"
+    ]
+  },
+  {
+    "id": 18,
+    "productName": "Casual Blue Shirt",
+    "category": "shirt",
+    "ratings": 4.2,
+    "reviews": [],
+    "size": ["M", "L"],
+    "color": ["Sky Blue"],
+    "discountPrice": 1399,
+    "sellPrice": 1699,
+    "productDetails": "Casual shirt for daily wear.",
+    "images": [
+      "https://i.ibb.co/0jR6GzmV/Frame-71-1.png",
+      "https://i.ibb.co/67hjVHcq/Frame-71.png",
+      "https://i.ibb.co/v4BmnqRP/Frame-72.png",
+      "https://i.ibb.co/Y4xy7Lc8/Frame-73.png"
+    ]
+  },
+  {
+    "id": 19,
+    "productName": "Cargo Shorts",
+    "category": "shorts",
+    "ratings": 4.3,
+    "reviews": [],
+    "size": ["M", "L", "XL"],
+    "color": ["Olive"],
+    "discountPrice": 899,
+    "sellPrice": 1099,
+    "productDetails": "Cargo shorts with utility pockets.",
+    "images": [
+      "https://i.ibb.co/4gDzHPCS/Frame-32.png",
+      "https://i.ibb.co/KcdgK8ys/Frame-33.png",
+      "https://i.ibb.co/mVj1rm3v/Frame-34.png",
+      "https://i.ibb.co/bMZnWbQj/Frame-38.png"
+    ]
+  },
+  {
+    "id": 20,
+    "productName": "Dark Blue Jeans",
+    "category": "jeans",
+    "ratings": 4.6,
+    "reviews": [],
+    "size": ["30", "32", "34", "36"],
+    "color": ["Dark Blue"],
+    "discountPrice": 2499,
+    "sellPrice": 2999,
+    "productDetails": "Dark wash premium denim jeans.",
+    "images": [
+      "https://i.ibb.co/xKZ8LKQZ/Frame-70.png",
+      "https://i.ibb.co/0jR6GzmV/Frame-71-1.png",
+      "https://i.ibb.co/67hjVHcq/Frame-71.png",
+      "https://i.ibb.co/v4BmnqRP/Frame-72.png"
+    ]
+  }
+]
