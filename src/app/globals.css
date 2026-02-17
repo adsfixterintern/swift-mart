@@ -38,9 +38,9 @@
   font-size: 14px;
   font-weight: 500;
   color: var(--color-white);
-  padding: 12px 18px;
+  padding: 12px 50px;
   background-color: var(--color-primary);
-  border-radius: 12px; /* rounded-xl feel */
+  border-radius: 50px; /* rounded-xl feel */
   transition: all 0.2s ease-in-out;
 }
 
@@ -52,20 +52,18 @@
 
 
 
+.brand-versace,
+.brand-zara,
+.brand-gucci,
+.brand-prada {
+  font-family: 'Playfair Display', serif;
+  letter-spacing: 0.15em;
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+.brand-calvin {
+  font-family: 'Montserrat', sans-serif;
+  letter-spacing: 0.05em;
+}
 
 
 

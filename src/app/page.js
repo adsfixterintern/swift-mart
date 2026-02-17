@@ -1,3 +1,5 @@
+import Brands from "@/components/Home/Brands";
+import Hero from "@/components/Home/Hero";
 import Image from "next/image";
 import Products from "./products/page";
 
