@@ -2,6 +2,7 @@ import Brands from "@/components/Home/Brands";
 import BrowseByDressStyle from "@/components/Home/BrowseByDressStyle";
 import Hero from "@/components/Home/Hero";
 import Image from "next/image";
+import Products from "./products/page";
 
 export const metadata = {
   title: "Home",
@@ -15,6 +16,7 @@ export default function Home() {
       <Hero></Hero>
       <Brands></Brands>
       <BrowseByDressStyle></BrowseByDressStyle>
+<Products></Products>
     </div>
   );
 }
