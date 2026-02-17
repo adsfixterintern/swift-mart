@@ -4,7 +4,7 @@ import Image from "next/image";
 
 export default function BrowseByDressStyle() {
   return (
-    <section className="py-20 bg-white">
+    <section className="py-20 ">
       <div className="max-w-6xl mx-auto px-4">
 
         <div className="bg-[var(--color-tertiary)] rounded-[40px] p-10 md:p-14">
