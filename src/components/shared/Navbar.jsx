@@ -3,12 +3,13 @@
 "use client";
 import { Search, ShoppingCart, User, Menu } from "lucide-react";
 import { useState } from "react";
+import ThemeToggle from "../ThemeToggle";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
 
   return (
-    <nav className="w-full bg-white">
+    <nav className="w-full bg-white dark:bg-gray-900 shadow">
       <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
 
         {/* Left */}
@@ -49,6 +50,7 @@ export default function Navbar() {
           <Search className="md:hidden" size={20} />
           <ShoppingCart size={20} />
           <User size={20} />
+          <ThemeToggle />
         </div>
       </div>
 
