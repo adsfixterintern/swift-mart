@@ -39,12 +39,12 @@ export default function Hero() {
 
         {/* Right Image */}
         <div className="relative w-full h-[400px] md:h-[500px]">
-          <Image
+          {/* <Image
             src="/hero.png"
             alt="Fashion Models"
             fill
             className="object-contain"
-          />
+          /> */}
         </div>
       </div>
     </section>
