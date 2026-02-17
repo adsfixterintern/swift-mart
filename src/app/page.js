@@ -1,9 +1,10 @@
 import Image from "next/image";
+import Products from "./products/page";
 
 export default function Home() {
   return (
     <div>
-<h1 className="section-title">Hello World</h1>
+<Products></Products>
     </div>
   );
 }
