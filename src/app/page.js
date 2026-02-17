@@ -15,8 +15,9 @@ export default function Home() {
     <div>
       <Hero></Hero>
       <Brands></Brands>
+      <Products></Products>
       <BrowseByDressStyle></BrowseByDressStyle>
-<Products></Products>
+      
     </div>
   );
 }

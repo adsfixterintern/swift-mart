@@ -7,7 +7,7 @@ export default function BrowseByDressStyle() {
     <section className="py-20 ">
       <div className="max-w-6xl mx-auto px-4">
 
-        <div className="bg-[var(--color-tertiary)] rounded-[40px] p-10 md:p-14">
+        <div className="bg-primary rounded-[40px] p-10 md:p-14">
 
           <h2 className="section-title font-extrabold text-center mb-14">
             BROWSE BY DRESS STYLE
