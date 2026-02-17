@@ -4,7 +4,7 @@
 :root {
   --color-primary: #000000;
   --color-secondary: rgba(0, 0, 0, 0.6);
-  --color-white: #ffffff;
+  --color-tertiary: #F0F0F0;
 }
 /* section title  */
 .section-title {
