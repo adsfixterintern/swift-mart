@@ -18,7 +18,7 @@ export default function BrowseByDressStyle() {
                 src="/BrowseStyle/casual.png"
                 alt="Casual"
                 fill
-                className="object-cover object-right scale-[1.7] translate-x-44"
+                className="object-cover object-right scale-[1.7] translate-x-52"
               />
 
               {/* Text */}
@@ -33,7 +33,7 @@ export default function BrowseByDressStyle() {
                 src="/BrowseStyle/formal.png"
                 alt="Formal"
                 fill
-                className="object-cover object-right scale-[1.6] translate-x-60 translate-y-16"
+                className="object-cover object-right scale-[1.6] translate-x-65 translate-y-16"
               />
               <h3 className="absolute top-6 left-6 text-xl font-semibold">
                 Formal
