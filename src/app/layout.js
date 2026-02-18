@@ -31,14 +31,15 @@ export default function RootLayout({ children }) {
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <Toaster position="top-center" reverseOrder={false} />
-<ThemeProvider><CartProvider>
-  <ReactQueryProvider>
-    <Navbar />
-      {children}
-    <Footer />
-  </ReactQueryProvider>
-</CartProvider></ThemeProvider>
-
+        <ThemeProvider>
+          <CartProvider>
+            <ReactQueryProvider>
+              <Navbar />
+              {children}
+              <Footer />
+            </ReactQueryProvider>
+          </CartProvider>
+        </ThemeProvider>
       </body>
     </html>
   );
