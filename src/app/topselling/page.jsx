@@ -1,7 +1,9 @@
 "use client";
 import React from 'react';
 import { useQuery } from '@tanstack/react-query';
-import ProductCard from './_component/ProductCard';
+import ProductCard from '../products/_component/ProductCard';
+
+
 
 export default function Products() {
   const { data: products, isLoading, isError } = useQuery({
@@ -17,9 +19,9 @@ export default function Products() {
   if (isError) return <div className="text-center py-20 text-red-500">Error loading data.</div>;
 
   return (
-    <section className="max-w-[1240px] mx-auto px-4 py-12 md:py-20 border-b border-black/10">
+    <section className="max-w-[1240px] mx-auto px-4 py-12 md:py-20 ">
       <h2 className="section-title text-center mb-10 md:mb-14 uppercase tracking-tighter">
-        New Arrivals
+      TOP SELLING
       </h2>
 
       {/* Mobile-e scroll korar jonno: 
