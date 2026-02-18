@@ -3,6 +3,8 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
 import { useCart } from "@/context/CartContext";
+import AllReviewSection from "../_component/AllReviewSection";
+import YouMightAlsoLIght from "../_component/YouMightAlsoLIght";
 
 export default function ProductDetails() {
   const params = useParams();
@@ -210,6 +212,8 @@ export default function ProductDetails() {
           </div>
         </div>
       </div>
+      <AllReviewSection></AllReviewSection>
+      <YouMightAlsoLIght></YouMightAlsoLIght>
     </div>
   );
 }
