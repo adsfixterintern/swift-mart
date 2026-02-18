@@ -46,10 +46,10 @@ export default function ReviewSlider() {
   }, [reviews, visibleCards]);
 
   return (
-    <section className={`${styles.section}`}>
-      <div className={`${styles.header} max-w-6xl mx-auto px-4`}>
-        <p className="section-title">OUR HAPPY CUSTOMERS</p>
-
+    <section className={`${styles.section} max-w-6xl mx-auto`}>
+      <div className={`${styles.header} `}>
+        <h2 className="section-title">OUR HAPPY CUSTOMERS</h2>
+      
         <div className={styles.nav}>
           <button
             onClick={() =>

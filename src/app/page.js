@@ -18,11 +18,9 @@ export default function Home() {
       <Hero></Hero>
       <Brands></Brands>
       <Products></Products>
+      <TopSelling></TopSelling>
       <BrowseByDressStyle></BrowseByDressStyle>
       <ReviewSlider></ReviewSlider>
-      <TopSelling></TopSelling>
-   
-      
     </div>
   );
 }
