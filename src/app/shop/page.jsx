@@ -1,8 +1,39 @@
-"use client"; 
+"use client";
+import { useQuery } from "@tanstack/react-query";
 import React, { useState } from "react";
+import ProductCard from "../products/_component/ProductCard";
+import Link from "next/link";
 
 const ShopPage = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+  //   fetched product
+  const {
+    data: products,
+    isLoading,
+    isError,
+  } = useQuery({
+    queryKey: ["products"],
+    queryFn: async () => {
+      const res = await fetch("/products.json");
+      if (!res.ok) throw new Error("Failed to fetch products");
+      return res.json();
+    },
+  });
+
+  if (isLoading)
+    return <div className="text-center py-20 font-bold">Loading...</div>;
+  if (isError)
+    return (
+      <div className="text-center py-20 text-red-500">Error loading data.</div>
+    );
+
+  //  set unique category
+  const uniqueCategories = products
+    ? [...new Set(products.map((item) => item.category))]
+    : [];
+
+  console.log("unique cate", uniqueCategories);
 
   // Filter content - Jeta Mobile o Desktop dui jaygay thakbe
   const FilterContent = () => (
@@ -18,13 +49,15 @@ const ShopPage = () => {
       </div>
       <hr className="border-gray-200 dark:border-gray-400 " />
       <div className="space-y-3 text-gray-600">
-        {["T-shirts", "Shorts", "Shirts", "Hoodie", "Jeans"].map((item) => (
-          <div
+        {uniqueCategories.map((item) => (
+          <Link
             key={item}
-            className="flex dark:text-white dark:hover:text-gray-300 justify-between cursor-pointer hover:text-black "
+            // href-te category name dynamically boshbe
+            href={`/category/${item.toLowerCase()}`}
+            className="flex dark:text-white dark:hover:text-gray-300 justify-between cursor-pointer hover:text-black capitalize"
           >
             {item} <span>&gt;</span>
-          </div>
+          </Link>
         ))}
       </div>
       <hr className="border-gray-200 dark:border-gray-600 " />
@@ -72,14 +105,14 @@ const ShopPage = () => {
       <hr className="border-gray-200 dark:border-gray-600 " />
       {/* Dress style  */}
       <div className="mt-4">
-        <span className="font-bold">Size:</span>
+        <span className="font-bold">Dress Style:</span>
         <div className="space-y-3 text-gray-600 mt-4">
           {["Casual", "Formal", "Party", "Gym"].map((item) => (
             <div
               key={item}
               className="flex justify-between dark:text-white dark:hover:text-gray-300  cursor-pointer hover:text-black"
             >
-              {item} <span>&gt;</span>
+              <Link href={`/category/${item}`}>{item}</Link> <span>&gt;</span>
             </div>
           ))}
         </div>
@@ -89,6 +122,8 @@ const ShopPage = () => {
       </button>
     </div>
   );
+
+  //   loading and error handling
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-6">
@@ -137,24 +172,9 @@ const ShopPage = () => {
         {/* PRODUCT GRID */}
         <main className="flex-1">
           <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
-            {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 16, 17, 19].map(
-              (item) => (
-                <div key={item} className="group cursor-pointer">
-                  <div className="bg-[#F0EEED] rounded-2xl aspect-square mb-3 overflow-hidden">
-                    <img
-                      src={`https://via.placeholder.com/300?text=Item+${item}`}
-                      alt="img"
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                  <h3 className="subtitle dark:text-white! ">
-                    Product Name {item}
-                  </h3>
-                  <div className="text-yellow-400 text-xs">★★★★☆</div>
-                  <div className="price-title dark:text-white!">$145</div>
-                </div>
-              ),
-            )}
+            {products?.map((product) => (
+              <ProductCard key={product.id} product={product} />
+            ))}
           </div>
         </main>
       </div>
