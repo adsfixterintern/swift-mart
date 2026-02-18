@@ -1,5 +1,7 @@
 "use client";
+
 import React, { useState, useEffect } from "react";
+import Image from "next/image";
 import { useParams } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
 import { useCart } from "@/context/CartContext";
@@ -9,14 +11,15 @@ import YouMightAlsoLIght from "../_component/YouMightAlsoLIght";
 export default function ProductDetails() {
   const params = useParams();
   const productId = params?.id || params?.slug;
-
   const { addToCart } = useCart();
 
+  // 🔹 Local State
+  const [mainImage, setMainImage] = useState("");
   const [selectedColor, setSelectedColor] = useState("");
   const [selectedSize, setSelectedSize] = useState("");
   const [quantity, setQuantity] = useState(1);
-  const [mainImage, setMainImage] = useState("");
 
+  // 🔹 Fetch Products
   const { data: products, isLoading } = useQuery({
     queryKey: ["products"],
     queryFn: async () => {
@@ -26,77 +29,101 @@ export default function ProductDetails() {
     },
   });
 
+  // 🔹 Find Product
   const product = products?.find(
     (p) => p.id.toString() === productId?.toString()
   );
 
+  // 🔹 Sync state when product loads/changes
   useEffect(() => {
-    if (product) {
-      setMainImage(product.images[0]);
-      setSelectedColor(product.color[0]);
-      setSelectedSize(product.size[0]);
-    }
-  }, [product]);
+    if (!product) return;
 
-  if (isLoading)
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setMainImage(product.images?.[0] || "");
+    setSelectedColor(product.color?.[0] || "");
+    setSelectedSize(product.size?.[0] || "");
+    setQuantity(1);
+  }, [product?.id]);
+
+  // 🔹 Loading UI
+  if (isLoading) {
     return (
-      <div className="text-center py-20 font-bold p-text">Loading...</div>
+      <div className="text-center py-20 font-bold p-text">
+        Loading...
+      </div>
     );
+  }
 
-  if (!product)
+  // 🔹 Product Not Found
+  if (!product) {
     return (
       <div className="text-center py-20 font-bold p-text">
         Product not found! (ID: {productId})
       </div>
     );
+  }
 
   const discountPercentage = Math.round(
-    ((product.sellPrice - product.discountPrice) / product.sellPrice) * 100
+    ((product.sellPrice - product.discountPrice) /
+      product.sellPrice) *
+      100
   );
 
   return (
-    <div className="max-w-[1240px] mx-auto px-4 py-10">
+    <div
+      key={product.id}
+      className="max-w-[1240px] mx-auto px-4 py-10"
+    >
       <div className="flex flex-col lg:flex-row gap-10">
-        {/* Left: Images */}
+        {/* LEFT SIDE - IMAGES */}
         <div className="flex flex-col-reverse lg:flex-row gap-4 w-full lg:w-1/2">
           <div className="flex lg:flex-col gap-3 overflow-x-auto lg:overflow-visible">
-            {product.images.map((img, index) => (
+            {product.images?.map((img, index) => (
               <div
                 key={index}
                 onClick={() => setMainImage(img)}
                 className={`min-w-[80px] h-[80px] lg:w-[120px] lg:h-[120px] bg-[#F0EEED] rounded-[20px] cursor-pointer border-2 transition-all overflow-hidden flex items-center justify-center ${
-                  mainImage === img ? "border-black" : "border-transparent"
+                  mainImage === img
+                    ? "border-black"
+                    : "border-transparent"
                 }`}
               >
-                <img
+                <Image
                   src={img}
-                  alt="thumb"
-                  className="w-full h-full object-contain"
+                  alt="thumbnail"
+                  width={120}
+                  height={120}
+                  className="object-contain"
                 />
               </div>
             ))}
           </div>
 
           <div className="flex-1 bg-[#F0EEED] rounded-[20px] overflow-hidden flex items-center justify-center p-6 h-[400px] lg:h-[530px]">
-            <img
+            <Image
               src={mainImage}
               alt={product.productName}
-              className="w-full h-full object-contain"
+              width={500}
+              height={500}
+              className="object-contain h-full w-full"
             />
           </div>
         </div>
 
-        {/* Right: Details */}
+        {/* RIGHT SIDE - DETAILS */}
         <div className="w-full lg:w-1/2 flex flex-col gap-4">
           <h1 className="section-title !text-[32px] md:!text-[40px] uppercase leading-tight">
             {product.productName}
           </h1>
 
+          {/* Ratings */}
           <div className="flex items-center gap-2">
             <div className="flex text-[#FFC633] text-xl">
               {[...Array(5)].map((_, i) => (
                 <span key={i}>
-                  {i < Math.floor(product.ratings) ? "★" : "☆"}
+                  {i < Math.floor(product.ratings)
+                    ? "★"
+                    : "☆"}
                 </span>
               ))}
             </div>
@@ -105,6 +132,7 @@ export default function ProductDetails() {
             </span>
           </div>
 
+          {/* Price */}
           <div className="flex items-center gap-4">
             <span className="price-title !text-[32px]">
               ${product.discountPrice}
@@ -121,13 +149,13 @@ export default function ProductDetails() {
             {product.productDetails}
           </p>
 
-          {/* Color */}
+          {/* COLOR */}
           <div className="border-b border-black/10 pb-4">
             <p className="p-text mb-3 !text-black font-medium">
               Select Colors
             </p>
             <div className="flex gap-3">
-              {product.color.map((c, i) => (
+              {product.color?.map((c, i) => (
                 <div
                   key={i}
                   onClick={() => setSelectedColor(c)}
@@ -154,13 +182,13 @@ export default function ProductDetails() {
             </div>
           </div>
 
-          {/* Size */}
+          {/* SIZE */}
           <div className="border-b border-black/10 pb-4">
             <p className="p-text mb-3 !text-black font-medium">
               Choose Size
             </p>
             <div className="flex gap-3">
-              {product.size.map((s, i) => (
+              {product.size?.map((s, i) => (
                 <button
                   key={i}
                   onClick={() => setSelectedSize(s)}
@@ -176,7 +204,7 @@ export default function ProductDetails() {
             </div>
           </div>
 
-          {/* Quantity + Add to Cart */}
+          {/* QUANTITY + CART */}
           <div className="flex gap-4 mt-6">
             <div className="flex items-center justify-between bg-[#F0EEED] px-5 py-3 rounded-full w-1/3">
               <button
@@ -187,9 +215,13 @@ export default function ProductDetails() {
               >
                 -
               </button>
-              <span className="font-medium text-lg">{quantity}</span>
+              <span className="font-medium text-lg">
+                {quantity}
+              </span>
               <button
-                onClick={() => setQuantity((q) => q + 1)}
+                onClick={() =>
+                  setQuantity((q) => q + 1)
+                }
                 className="text-2xl font-bold"
               >
                 +
@@ -212,8 +244,9 @@ export default function ProductDetails() {
           </div>
         </div>
       </div>
-      <AllReviewSection></AllReviewSection>
-      <YouMightAlsoLIght></YouMightAlsoLIght>
+
+      <AllReviewSection />
+      <YouMightAlsoLIght />
     </div>
   );
 }
