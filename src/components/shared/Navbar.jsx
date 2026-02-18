@@ -5,11 +5,13 @@ import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import ThemeToggle from "../ThemeToggle";
+import { useCart } from "@/context/CartContext";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [mobileSearchOpen, setMobileSearchOpen] = useState(false);
   const pathname = usePathname();
+  const {cartCount,cart}=useCart();
 
   const navItems = [
     { name: "Shop", href: "/shop" },
@@ -19,8 +21,8 @@ export default function Navbar() {
   ];
 
   return (
-    <nav className="w-full bg-white dark:bg-gray-900 shadow">
-      <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
+    <nav className="w-full bg-white sticky top-0 z-50 dark:bg-gray-900 shadow">
+      <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-6 py-4 flex items-center justify-between">
 
         {/* Left */}
         <div className="flex items-center gap-6">
@@ -81,7 +83,17 @@ export default function Navbar() {
             size={20} 
             onClick={() => setMobileSearchOpen(!mobileSearchOpen)}
           />
-         <Link href={'/cart'}> <ShoppingCart className="cursor-pointer" size={20} /></Link>
+         <Link 
+  href="/cart" 
+  className="relative flex items-center p-1 transition-colors hover:text-black dark:hover:text-white text-gray-700 dark:text-gray-200"
+>
+  <ShoppingCart className="cursor-pointer" size={24} />
+  {cart && cart.length > 0 && (
+    <span className="absolute -top-1 -right-2 flex h-5 w-5 items-center justify-center rounded-full bg-red-500 text-[10px] font-bold text-white border-2 border-white dark:border-gray-900 shadow-sm">
+      {cart.length}
+    </span>
+  )}
+</Link>
           <Link href={'/profile'}><User className="cursor-pointer" size={20} /></Link>
           <ThemeToggle />
         </div>

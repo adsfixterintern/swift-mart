@@ -17,7 +17,11 @@ const nextConfig = {
       {
         protocol: "https",
         hostname: "i.ibb.co"
-      }
+      },
+      {
+        protocol: "https",
+        hostname: "upload.wikimedia.org"
+      },
     ],
     formats: ["image/webp", "image/avif"],
   },
