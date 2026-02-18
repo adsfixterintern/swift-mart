@@ -9,6 +9,12 @@ const [cart, setCart] = useState(() => {
   return JSON.parse(localStorage.getItem("cart")) || [];
 });
 
+  // Load from localStorage
+  useEffect(() => {
+    const storedCart = JSON.parse(localStorage.getItem("cart")) || [];
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setCart(storedCart);
+  }, []);
 
   // Save to localStorage
   useEffect(() => {
@@ -48,16 +54,37 @@ const [cart, setCart] = useState(() => {
     });
   };
 
-  const removeFromCart = (id) => {
-    setCart(prev => prev.filter(item => item.id !== id));
+  const updateQuantity = (id, color, size, type) => {
+    setCart((prev) =>
+      prev.map((item) => {
+        if (item.id === id && item.color === color && item.size === size) {
+          let newQuantity = item.quantity;
+          
+          if (type === "increment") newQuantity += 1;
+          if (type === "decrement" && newQuantity > 1) newQuantity -= 1; 
+          return {
+            ...item,
+            quantity: newQuantity,
+            totalPrice: newQuantity * item.price, 
+          };
+        }
+        return item;
+      })
+    );
   };
 
+
+const removeFromCart = (id, color, size) => {
+  setCart(prev => 
+    prev.filter(item => !(item.id === id && item.color === color && item.size === size))
+  );
+};
   const cartCount = cart.reduce((sum, item) => sum + item.quantity, 0);
   const cartTotal = cart.reduce((sum, item) => sum + item.totalPrice, 0);
 
   return (
     <CartContext.Provider
-      value={{ cart, addToCart, removeFromCart, cartCount, cartTotal }}
+      value={{ cart, addToCart, removeFromCart,updateQuantity, cartCount, cartTotal }}
     >
       {children}
     </CartContext.Provider>

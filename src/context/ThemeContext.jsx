@@ -16,6 +16,15 @@ export const ThemeProvider = ({ children }) => {
     localStorage.setItem("theme", theme);
   }, [theme]);
 
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setTheme(saved);
+
+    if (saved === "dark") {
+      document.documentElement.classList.add("dark");
+    }
+  }, []);
+
+  // Toggle Theme
   const toggleTheme = () => {
     setTheme(t => (t === "dark" ? "light" : "dark"));
   };
