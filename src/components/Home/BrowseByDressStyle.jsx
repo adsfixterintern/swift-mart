@@ -2,10 +2,10 @@ import Image from "next/image";
 
 export default function BrowseByDressStyle() {
   return (
-    <section className="py-20 ">
-      <div className="max-w-6xl mx-auto px-4">
+    <section className="">
+      <div className="max-w-6xl mx-auto">
         <div className="bg-primary rounded-[40px] p-10 md:p-14">
-          <h2 className="section-title font-extrabold text-center mb-14">
+          <h2 className="section-title text-center mb-14">
             BROWSE BY DRESS STYLE
           </h2>
 
