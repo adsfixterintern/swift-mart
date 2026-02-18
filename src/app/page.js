@@ -4,6 +4,7 @@ import Hero from "@/components/Home/Hero";
 import Image from "next/image";
 import Products from "./products/page";
 import ReviewSlider from "@/components/Home/ReviewSlider/ReviewSlider";
+import TopSelling from "./topselling/page";
 
 export const metadata = {
   title: "Home",
@@ -19,6 +20,8 @@ export default function Home() {
       <Products></Products>
       <BrowseByDressStyle></BrowseByDressStyle>
       <ReviewSlider></ReviewSlider>
+      <TopSelling></TopSelling>
+   
       
     </div>
   );
