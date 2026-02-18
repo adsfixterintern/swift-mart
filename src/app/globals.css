@@ -1,13 +1,24 @@
 @import "tailwindcss";
-
+@variant dark (&:where(.dark, .dark *));
 
 :root {
   --color-primary: #000000;
   --color-secondary: rgba(0, 0, 0, 0.6);
-  --color-tertiary: #F0F0F0;
+  --color-tertiary: #f0f0f0;
 }
-.bg-primary{
-  background-color: #F0F0F0;
+
+.dark {
+  --background: #0a0a0a;
+  --foreground: #ededed;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+}
+
+.bg-primary {
+  background-color: #f0f0f0;
 }
 /* section title  */
 .section-title {
@@ -35,7 +46,6 @@
   color: var(--color-primary);
 }
 
-
 /* global btn */
 .btn-global {
   font-size: 14px;
@@ -51,31 +61,18 @@
   opacity: 0.9;
 }
 
-
-
-
-
 .brand-versace,
 .brand-zara,
 .brand-gucci,
 .brand-prada {
-  font-family: 'Playfair Display', serif;
+  font-family: "Playfair Display", serif;
   letter-spacing: 0.15em;
 }
 
 .brand-calvin {
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   letter-spacing: 0.05em;
 }
-
-
-
-
-
-
-
-
-
 
 /* section title mobile   */
 @media (max-width: 768px) {
