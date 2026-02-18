@@ -1,11 +1,11 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "react-hot-toast";
-import { ThemeProvider } from "@/context/ThemeContext";
 import ReactQueryProvider from "@/providers/ReactQueryProvider";
 import Footer from "@/components/shared/Footer";
 import Navbar from "@/components/shared/Navbar";
 import { CartProvider } from "@/context/CartContext";
+import { ThemeProvider } from "@/context/ThemeContext";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -31,15 +31,16 @@ export default function RootLayout({ children }) {
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <Toaster position="top-center" reverseOrder={false} />
-        <ThemeProvider>
-          <CartProvider>
-            <ReactQueryProvider>
-              <Navbar />
-              {children}
-              <Footer />
-            </ReactQueryProvider>
-          </CartProvider>
-        </ThemeProvider>
+<ThemeProvider>
+  <CartProvider>
+  <ReactQueryProvider>
+    <Navbar />
+      {children}
+    <Footer />
+  </ReactQueryProvider>
+</CartProvider>
+</ThemeProvider>
+
       </body>
     </html>
   );

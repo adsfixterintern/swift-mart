@@ -5,7 +5,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 const ThemeContext = createContext();
 
 export const ThemeProvider = ({ children }) => {
-  const [theme, setTheme] = useState(() => {
+   const [theme, setTheme] = useState(() => {
     if (typeof window === "undefined") return "light";
     return localStorage.getItem("theme") || "light";
   });
@@ -16,15 +16,6 @@ export const ThemeProvider = ({ children }) => {
     localStorage.setItem("theme", theme);
   }, [theme]);
 
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    setTheme(saved);
-
-    if (saved === "dark") {
-      document.documentElement.classList.add("dark");
-    }
-  }, []);
-
-  // Toggle Theme
   const toggleTheme = () => {
     setTheme(t => (t === "dark" ? "light" : "dark"));
   };
