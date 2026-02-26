@@ -5,6 +5,7 @@ import Image from "next/image";
 import Products from "./products/page";
 import ReviewSlider from "@/components/Home/ReviewSlider/ReviewSlider";
 import TopSelling from "./topselling/page";
+import SpinWheelModal from "./SpinWheelModal/SpinWheelModal";
 
 export const metadata = {
   title: "Home",
@@ -15,6 +16,7 @@ export const metadata = {
 export default function Home() {
   return (
     <div>
+      <SpinWheelModal></SpinWheelModal>
       <Hero></Hero>
       <Brands></Brands>
       <Products></Products>
