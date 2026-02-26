@@ -230,12 +230,20 @@ console.log(theme)
           </div>
 
           {/* Checkout Button */}
-          <button 
+          <Link href={{
+    pathname: '/checkout',
+    query: { 
+      subtotal: cartTotal.toFixed(2),
+      discount: discountAmount.toFixed(2),
+      delivery: deliveryFee.toFixed(2),
+      total: finalTotal.toFixed(2)
+    }
+  }}
             disabled={cart.length === 0}
             className="w-full flex justify-center items-center gap-2 bg-black text-white dark:bg-white dark:text-black py-4 rounded-full font-medium hover:opacity-90 transition-opacity mt-4 disabled:opacity-50 disabled:cursor-not-allowed"
           >
             Go to Checkout <ArrowRight size={20} />
-          </button>
+          </Link>
         </div>
 
       </div>
