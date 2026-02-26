@@ -219,17 +219,11 @@ const ShopPage = () => {
         )}
 
         <main className="flex-1">
-          {displayProducts.length > 0 ? (
-            <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
-              {displayProducts.map((product) => (
-                <ProductCard key={product.id} product={product} />
-              ))}
-            </div>
-          ) : (
-            <div className="text-center py-20 text-gray-500">
-              No products found with these filters.
-            </div>
-          )}
+          <div className="grid grid-cols-2 pb-20 lg:grid-cols-3 gap-4 md:gap-6">
+            {products?.map((product) => (
+              <ProductCard key={product.id} product={product} />
+            ))}
+          </div>
         </main>
       </div>
     </div>
