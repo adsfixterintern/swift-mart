@@ -3,7 +3,7 @@ import { Mail, Twitter, Facebook, Instagram, Github } from "lucide-react";
 
 export default function Footer() {
   return (
-    <footer className="relative bg-primary pt-32 mt-20">
+    <footer className="relative  bg-[#f0f0f0] dark:bg-gray-900 pt-32 mt-20">
       {/* ================= NEWSLETTER ================= */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-7xl px-4 z-20">
         <div className="bg-black rounded-2xl px-6 md:px-6 py-10 md:py-8 flex flex-col md:flex-row items-center justify-between gap-6">
@@ -14,8 +14,8 @@ export default function Footer() {
 
           {/* Input + Button */}
           <div className="w-full md:w-auto flex flex-col gap-4">
-            <div className="flex items-center bg-white rounded-full px-4 py-3 w-full md:w-[350px]">
-              <Mail size={18} className="text-gray-400 mr-2" />
+            <div className="flex items-center bg-white dark:text-black rounded-full px-4 py-3 w-full md:w-[350px]">
+              <Mail size={18} className="text-gray-400 dark:text-black mr-2" />
               <input
                 type="email"
                 placeholder="Enter your email address"
@@ -44,17 +44,17 @@ export default function Footer() {
 
             {/* Social Icons */}
             <div className="flex gap-3">
-              <div className="bg-white p-2 rounded-full shadow-sm">
-                <Twitter size={16} />
+              <div className="bg-white dark:bg-black p-2 rounded-full shadow-sm">
+                <Twitter size={16} className="dark:text-white" />
               </div>
-              <div className="bg-white p-2 rounded-full shadow-sm">
-                <Facebook size={16} />
+              <div className="bg-white dark:bg-black p-2 rounded-full shadow-sm">
+                <Facebook size={16} className="dark:text-white" />
               </div>
-              <div className="bg-white p-2 rounded-full shadow-sm">
-                <Instagram size={16} />
+              <div className="bg-white dark:bg-black p-2 rounded-full shadow-sm">
+                <Instagram size={16} className="dark:text-white" />
               </div>
-              <div className="bg-white p-2 rounded-full shadow-sm">
-                <Github size={16} />
+              <div className="bg-white dark:bg-black p-2 rounded-full shadow-sm">
+                <Github size={16} className="dark:text-white" />
               </div>
             </div>
           </div>
@@ -107,7 +107,7 @@ export default function Footer() {
         <div className="border-t my-8 border-gray-300"></div>
 
         {/* Bottom Section */}
-        <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-500">
+        <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-500 dark:text-white">
           <p>SwiftMart © 2000-2023, All Rights Reserved</p>
 
           {/* Payment Icons */}
