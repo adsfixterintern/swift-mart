@@ -10,7 +10,7 @@ import toast from "react-hot-toast";
 
 // Dynamic Map Import (IMPORTANT)
 const CheckoutMap = dynamic(
-  () => import("../../components/CheckOutMap"),
+  () => import("@/components/CheckOutMap"),
   { ssr: false }
 );
 
