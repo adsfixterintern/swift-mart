@@ -1,29 +1,20 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import dynamic from "next/dynamic";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useSearchParams } from "next/navigation";
 import * as z from "zod";
-import { useMapEvents } from "react-leaflet";
-import "leaflet/dist/leaflet.css";
+import toast from "react-hot-toast";
 
-// Dynamic imports (NO hooks here)
-const MapContainer = dynamic(
-  () => import("react-leaflet").then((mod) => mod.MapContainer),
-  { ssr: false }
-);
-const TileLayer = dynamic(
-  () => import("react-leaflet").then((mod) => mod.TileLayer),
-  { ssr: false }
-);
-const Marker = dynamic(
-  () => import("react-leaflet").then((mod) => mod.Marker),
+// Dynamic Map Import (IMPORTANT)
+const CheckoutMap = dynamic(
+  () => import("../../components/CheckOutMap"),
   { ssr: false }
 );
 
-// ---------------- ZOD VALIDATION ----------------
+// ---------------- VALIDATION ----------------
 const checkoutSchema = z.object({
   email: z.string().email("Enter valid email"),
   phone: z
@@ -60,22 +51,6 @@ export default function CheckoutPage() {
 
   const addressValue = watch("address");
 
-  // Fix Leaflet icon issue
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      const L = require("leaflet");
-      delete L.Icon.Default.prototype._getIconUrl;
-      L.Icon.Default.mergeOptions({
-        iconRetinaUrl:
-          "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon-2x.png",
-        iconUrl:
-          "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png",
-        shadowUrl:
-          "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png",
-      });
-    }
-  }, []);
-
   // Reverse Geocode
   const fetchAddress = async (lat, lng) => {
     setAddressLoading(true);
@@ -94,19 +69,6 @@ export default function CheckoutPage() {
     }
   };
 
-  // Map Click Handler
-  function LocationMarker() {
-    useMapEvents({
-      click(e) {
-        const { lat, lng } = e.latlng;
-        setPosition([lat, lng]);
-        fetchAddress(lat, lng);
-      },
-    });
-
-    return <Marker position={position} />;
-  }
-
   const handleNextStep = async () => {
     const isValid = await trigger([
       "email",
@@ -119,35 +81,23 @@ export default function CheckoutPage() {
   };
 
   const onSubmit = (data) => {
-    console.log("Order Data:", {
-      ...data,
-      coordinates: position,
-    });
-    alert("Order placed successfully!");
+    console.log("Order Data:", { ...data, coordinates: position });
+    toast.success("Order placed successfully!");
   };
 
+
+
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 py-16 px-4">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-black py-16 px-4 transition-colors duration-300">
       <div className="max-w-7xl mx-auto">
 
         {/* STEP INDICATOR */}
-        <div className="flex items-center justify-center mb-14">
+        <div className="flex items-center justify-center mb-14 text-gray-700 dark:text-gray-300">
           <div className="flex items-center gap-6">
-            <div className={`flex items-center gap-3 ${currentStep === 1 ? "opacity-100" : "opacity-40"}`}>
-              <div className="w-12 h-12 rounded-full flex items-center justify-center bg-black text-white font-bold text-lg">
-                1
-              </div>
-              <span className="font-semibold">Shipping</span>
-            </div>
-
-            <div className="w-16 h-[2px] bg-gray-300"></div>
-
-            <div className={`flex items-center gap-3 ${currentStep === 2 ? "opacity-100" : "opacity-40"}`}>
-              <div className="w-12 h-12 rounded-full flex items-center justify-center border-2 border-black font-bold text-lg">
-                2
-              </div>
-              <span className="font-semibold">Payment</span>
-            </div>
+            <Step number={1} label="Shipping" active={currentStep === 1} />
+            <div className="w-16 h-[2px] bg-gray-300 dark:bg-gray-700"></div>
+            <Step number={2} label="Payment" active={currentStep === 2} />
           </div>
         </div>
 
@@ -158,36 +108,21 @@ export default function CheckoutPage() {
 
             {currentStep === 1 && (
               <>
-                <div className="bg-white p-10 rounded-3xl shadow-xl border border-gray-100 space-y-6">
-
-                  <h2 className="text-2xl font-bold">Contact Information</h2>
-
+                <Card title="Contact Information">
                   <div className="grid md:grid-cols-2 gap-6">
-                    <div>
-                      <input {...register("email")} placeholder="Email Address" className="premium-input" />
-                      {errors.email && <p className="error-text">{errors.email.message}</p>}
-                    </div>
-
-                    <div>
-                      <input {...register("phone")} placeholder="Phone Number" className="premium-input" />
-                      {errors.phone && <p className="error-text">{errors.phone.message}</p>}
-                    </div>
+                    <InputField register={register} name="email" placeholder="Email Address" error={errors.email} />
+                    <InputField register={register} name="phone" placeholder="Phone Number" error={errors.phone} />
                   </div>
-                </div>
+                </Card>
 
-                <div className="bg-white p-10 rounded-3xl shadow-xl border border-gray-100 space-y-6">
+                <Card title="Shipping Address">
 
-                  <h2 className="text-2xl font-bold">Shipping Address</h2>
-
-                  <div className="h-80 rounded-2xl overflow-hidden shadow-md">
-                    <MapContainer
-                      center={position}
-                      zoom={13}
-                      style={{ height: "100%", width: "100%" }}
-                    >
-                      <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-                      <LocationMarker />
-                    </MapContainer>
+                  <div className="h-80 rounded-2xl overflow-hidden shadow-md border border-gray-200 dark:border-gray-700">
+                    <CheckoutMap
+                      position={position}
+                      setPosition={setPosition}
+                      fetchAddress={fetchAddress}
+                    />
                   </div>
 
                   <textarea
@@ -197,88 +132,74 @@ export default function CheckoutPage() {
                       setValue("address", e.target.value, { shouldValidate: true })
                     }
                     placeholder="Street address, apartment, etc."
-                    className="premium-input min-h-[120px]"
+                    className={inputStyle}
                   />
-                  {addressLoading && <p className="text-sm text-gray-500">Fetching address...</p>}
-                  {errors.address && <p className="error-text">{errors.address.message}</p>}
+                  {addressLoading && (
+                    <p className="text-sm text-gray-500 dark:text-gray-400">
+                      Fetching address...
+                    </p>
+                  )}
+                  {errors.address && <ErrorText message={errors.address.message} />}
 
                   <div className="grid md:grid-cols-2 gap-6">
-                    <div>
-                      <input {...register("firstName")} placeholder="First Name" className="premium-input" />
-                      {errors.firstName && <p className="error-text">{errors.firstName.message}</p>}
-                    </div>
-
-                    <div>
-                      <input {...register("lastName")} placeholder="Last Name" className="premium-input" />
-                      {errors.lastName && <p className="error-text">{errors.lastName.message}</p>}
-                    </div>
+                    <InputField register={register} name="firstName" placeholder="First Name" error={errors.firstName} />
+                    <InputField register={register} name="lastName" placeholder="Last Name" error={errors.lastName} />
                   </div>
 
                   <button
                     type="button"
                     onClick={handleNextStep}
-                    className="w-full bg-black text-white py-4 rounded-full font-semibold hover:scale-[1.02] active:scale-95 transition-all"
+                    className="w-full bg-black dark:bg-white text-white dark:text-black py-4 rounded-full font-semibold hover:scale-[1.02] active:scale-95 transition"
                   >
                     Continue to Payment
                   </button>
-                </div>
+                </Card>
               </>
             )}
 
             {currentStep === 2 && (
-              <div className="bg-white p-10 rounded-3xl shadow-xl border border-gray-100 space-y-6">
+              <Card title="Payment Method">
+
                 <button
                   type="button"
                   onClick={() => setCurrentStep(1)}
-                  className="text-gray-500 hover:text-black"
+                  className="text-gray-500 dark:text-gray-400 hover:text-black dark:hover:text-white transition"
                 >
                   ← Back to Shipping
                 </button>
 
-                <h2 className="text-2xl font-bold">Payment Method</h2>
-
-                <label className="flex items-center justify-between p-6 border-2 rounded-2xl cursor-pointer hover:border-black transition-all">
+                <label className="flex items-center justify-between p-6 border-2 border-gray-200 dark:border-gray-700 rounded-2xl cursor-pointer hover:border-black dark:hover:border-white transition text-black dark:text-white">
                   <div className="flex items-center gap-3">
                     <input type="radio" {...register("paymentMethod")} value="cod" />
-                    <span className="font-medium">Cash on Delivery</span>
+                    <span>Cash on Delivery</span>
                   </div>
                 </label>
-              </div>
+
+              </Card>
             )}
+
           </div>
 
           {/* RIGHT SUMMARY */}
           <div className="lg:col-span-5">
-            <div className="bg-white p-10 rounded-3xl shadow-2xl border border-gray-100 sticky top-20 space-y-6">
+            <div className="bg-white dark:bg-gray-900 p-10 rounded-3xl shadow-2xl dark:shadow-black/50 border border-gray-100 dark:border-gray-800 sticky top-20 space-y-6">
 
-              <h2 className="text-2xl font-bold border-b pb-4">Order Summary</h2>
+              <h2 className="text-2xl font-bold border-b border-gray-200 dark:border-gray-700 pb-4 text-black dark:text-white">
+                Order Summary
+              </h2>
 
-              <div className="space-y-4 text-gray-600">
-                <div className="flex justify-between">
-                  <span>Subtotal</span>
-                  <span className="font-semibold text-black">৳{subtotal}</span>
-                </div>
+              <SummaryRow label="Subtotal" value={subtotal} />
+              <SummaryRow label="Discount" value={`-৳${discount}`} red />
+              <SummaryRow label="Delivery" value={delivery} />
 
-                <div className="flex justify-between text-red-500">
-                  <span>Discount</span>
-                  <span>-৳{discount}</span>
-                </div>
-
-                <div className="flex justify-between">
-                  <span>Delivery</span>
-                  <span className="font-semibold text-black">৳{delivery}</span>
-                </div>
-              </div>
-
-              <div className="flex justify-between text-3xl font-bold border-t pt-6">
+              <div className="flex justify-between text-3xl font-bold border-t border-gray-200 dark:border-gray-700 pt-6 text-black dark:text-white">
                 <span>Total</span>
                 <span>৳{total}</span>
               </div>
 
               {currentStep === 2 && (
-                <button
-                  type="submit"
-                  className="w-full bg-black text-white py-5 rounded-full font-semibold hover:scale-[1.02] active:scale-95 transition-all"
+                <button type="submit"
+                  className="w-full bg-black dark:bg-white text-white dark:text-black py-5 rounded-full font-semibold hover:scale-[1.02] active:scale-95 transition"
                 >
                   Place Order
                 </button>
@@ -288,6 +209,67 @@ export default function CheckoutPage() {
 
         </form>
       </div>
+    </div>
+  );
+}
+
+/* ---------------- REUSABLE COMPONENTS ---------------- */
+
+const inputStyle = `
+w-full px-5 py-4 rounded-xl 
+border border-gray-300 dark:border-gray-700 
+bg-white dark:bg-gray-800 
+text-black dark:text-white 
+placeholder-gray-400 dark:placeholder-gray-500 
+focus:outline-none focus:ring-2 focus:ring-black dark:focus:ring-white
+transition-all duration-300
+`;
+
+function Card({ title, children }) {
+  return (
+    <div className="bg-white dark:bg-gray-900 p-10 rounded-3xl shadow-xl dark:shadow-black/40 border border-gray-100 dark:border-gray-800 space-y-6 transition">
+      <h2 className="text-2xl font-bold text-black dark:text-white">
+        {title}
+      </h2>
+      {children}
+    </div>
+  );
+}
+
+function InputField({ register, name, placeholder, error }) {
+  return (
+    <div>
+      <input {...register(name)} placeholder={placeholder} className={inputStyle} />
+      {error && <ErrorText message={error.message} />}
+    </div>
+  );
+}
+
+function ErrorText({ message }) {
+  return <p className="text-red-500 dark:text-red-400 text-sm mt-2">{message}</p>;
+}
+
+function Step({ number, label, active }) {
+  return (
+    <div className={`flex items-center gap-3 ${active ? "opacity-100" : "opacity-40"}`}>
+      <div className={`w-12 h-12 rounded-full flex items-center justify-center font-bold 
+      ${active 
+        ? "bg-black text-white dark:bg-white dark:text-black" 
+        : "border-2 border-black dark:border-white text-black dark:text-white"}`}>
+        {number}
+      </div>
+      <span className="font-semibold">{label}</span>
+    </div>
+  );
+}
+
+function SummaryRow({ label, value, red }) {
+  return (
+    <div className={`flex justify-between text-gray-600 dark:text-gray-400 ${red ? "text-red-500 dark:text-red-400" : ""}`}>
+      <span>{label}</span>
+      <span className="font-semibold text-black dark:text-white">
+        {red ? value : `৳${value}`}
+      </span>
     </div>
   );
 }
