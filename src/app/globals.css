@@ -23,6 +23,13 @@ body {
   transition: background-color 0.3s ease;
 }
 
+.leaflet-pane,
+.leaflet-top,
+.leaflet-bottom {
+  z-index: 0 !important;
+}
+
+
 .error-text {
   @apply text-sm text-red-500 mt-1;
 }

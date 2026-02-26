@@ -117,7 +117,7 @@ export default function CheckoutPage() {
 
                 <Card title="Shipping Address">
 
-                  <div className="h-80 rounded-2xl overflow-hidden shadow-md border border-gray-200 dark:border-gray-700">
+                  <div className="h-80 z-0 relative rounded-2xl overflow-hidden shadow-md border border-gray-200 dark:border-gray-700">
                     <CheckoutMap
                       position={position}
                       setPosition={setPosition}
