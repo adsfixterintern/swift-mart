@@ -18,7 +18,7 @@ export default function ReviewSlider() {
   // Responsive card count
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth <= 640) {
+      if (window.innerWidth <= 600) {
         setVisibleCards(1);
       } else if (window.innerWidth <= 1024) {
         setVisibleCards(2);
@@ -46,9 +46,9 @@ export default function ReviewSlider() {
   }, [reviews, visibleCards]);
 
   return (
-    <section className={`${styles.section} max-w-6xl mx-auto`}>
-      <div className={`${styles.header} `}>
-        <h2 className="section-title">OUR HAPPY CUSTOMERS</h2>
+    <section className={`${styles.section} max-w-7xl mx-auto`}>
+      <div className={`${styles.header} px-4`}>
+        <h2 className="section-title px-4">OUR HAPPY CUSTOMERS</h2>
       
         <div className={styles.nav}>
           <button
@@ -77,7 +77,7 @@ export default function ReviewSlider() {
         </div>
       </div>
 
-      <div className={styles.sliderWrapper}>
+      <div className={`${styles.sliderWrapper} px-4`}>
         <div
           className={styles.slider}
           style={{
