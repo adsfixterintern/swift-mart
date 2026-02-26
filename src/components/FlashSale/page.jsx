@@ -2,8 +2,9 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
-import ProductCard from "@/app/products/_component/ProductCard";
+
 import Link from "next/link";
+import ProductCard from "@/app/[locale]/products/_component/ProductCard";
 
 const FlashSale = ({ lang = "en", currency = "BDT", exchangeRate = 120 }) => {
   // Timer State

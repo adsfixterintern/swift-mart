@@ -1,15 +1,8 @@
 "use client";
 import { useQuery } from "@tanstack/react-query";
 import React, { useState, useMemo } from "react";
-<<<<<<< HEAD:src/app/shop/page.jsx
 import ProductCard from "../products/_component/ProductCard";
 import toast from "react-hot-toast";
-=======
-
-import Link from "next/link";
-import ProductCard from "../products/_component/ProductCard";
-
->>>>>>> development:src/app/[locale]/shop/page.jsx
 
 const ShopPage = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -238,12 +231,7 @@ const ShopPage = () => {
         </div>
       </div>
 
-<<<<<<< HEAD:src/app/shop/page.jsx
       <div className="flex flex-col md:flex-row gap-8 mb-20">
-=======
-      <div className="flex flex-col md:flex-row gap-8 mb-15">
-        {/* DESKTOP SIDEBAR - Fixed/Sticky on scroll */}
->>>>>>> development:src/app/[locale]/shop/page.jsx
         <aside className="hidden md:block w-64 flex-shrink-0">
           <div className="sticky top-24 border border-gray-200 dark:border-gray-800 p-5 rounded-2xl bg-white dark:bg-gray-950 shadow-sm">
             <FilterContent />
