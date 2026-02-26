@@ -4,7 +4,7 @@ import Hero from "@/components/Home/Hero";
 import Image from "next/image";
 import Products from "./products/page";
 import ReviewSlider from "@/components/Home/ReviewSlider/ReviewSlider";
-import SpinWheelModal from "./SpinWheelModal/SpinWheelModal";
+import SpinWheelModal from "@/app/[locale]/SpinWheelModal/SpinWheelModal";
 
 import TopSelling from "@/app/[locale]/topselling/page";
 export const metadata = {
