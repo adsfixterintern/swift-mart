@@ -11,9 +11,11 @@
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
     "@tanstack/react-query": "^5.90.21",
+    "critters": "^0.0.23",
     "leaflet": "^1.9.4",
     "lucide-react": "^0.570.0",
     "next": "16.1.6",
+    "next-intl": "^4.8.3",
     "react": "19.2.3",
     "react-dom": "19.2.3",
     "react-google-autocomplete": "^2.7.5",

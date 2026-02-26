@@ -4,9 +4,9 @@ import Hero from "@/components/Home/Hero";
 import Image from "next/image";
 import Products from "./products/page";
 import ReviewSlider from "@/components/Home/ReviewSlider/ReviewSlider";
-import TopSelling from "./topselling/page";
 import SpinWheelModal from "./SpinWheelModal/SpinWheelModal";
 
+import TopSelling from "@/app/[locale]/topselling/page";
 export const metadata = {
   title: "Home",
   description: "Home Page",

@@ -1,9 +1,10 @@
-
 "use client";
 import { useQuery } from "@tanstack/react-query";
 import React, { useState, useMemo } from "react";
-import ProductCard from "../products/_component/ProductCard";
+
 import Link from "next/link";
+import ProductCard from "../products/_component/ProductCard";
+
 
 const ShopPage = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -196,7 +197,6 @@ const ShopPage = () => {
         </button>
       </div>
 
-     
       <div className="flex flex-col md:flex-row gap-8 mb-15">
         {/* DESKTOP SIDEBAR - Fixed/Sticky on scroll */}
         <aside className="hidden md:block w-64 flex-shrink-0">
