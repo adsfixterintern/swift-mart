@@ -2,6 +2,7 @@
 import React from 'react';
 import { useQuery } from '@tanstack/react-query';
 import ProductCard from './_component/ProductCard';
+import Link from 'next/link';
 
 export default function Products() {
   const { data: products, isLoading, isError } = useQuery({
@@ -35,9 +36,11 @@ export default function Products() {
       </div>
 
       <div className="flex justify-center mt-12">
+        <Link href="/shop" className="w-full md:w-auto">
         <button className="btn-global !bg-transparent !text-black border border-black/10 px-16 py-4 hover:!bg-black hover:!text-white w-full md:w-auto transition-all">
           View All
         </button>
+        </Link>
       </div>
     </section>
   );
