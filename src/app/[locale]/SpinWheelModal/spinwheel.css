@@ -1,9 +1,5 @@
 
 
-<<<<<<< HEAD
-=======
-
->>>>>>> development
 /* ===== Overlay ===== */
 .overlay {
   position: fixed;
@@ -150,8 +146,4 @@
     opacity: 1;
     transform: translateY(0);
   }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> development
