@@ -5,6 +5,7 @@ import Image from "next/image";
 import Products from "./products/page";
 import ReviewSlider from "@/components/Home/ReviewSlider/ReviewSlider";
 import TopSelling from "./topselling/page";
+import FlashSale from "@/components/FlashSale/page";
 
 export const metadata = {
   title: "Home",
@@ -19,6 +20,7 @@ export default function Home() {
       <Brands></Brands>
       <Products></Products>
       <TopSelling></TopSelling>
+      <FlashSale></FlashSale>
       <BrowseByDressStyle></BrowseByDressStyle>
       <ReviewSlider></ReviewSlider>
     </div>
