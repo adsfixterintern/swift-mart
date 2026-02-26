@@ -1,8 +1,9 @@
 "use client";
 import { useQuery } from "@tanstack/react-query";
 import React, { useState } from "react";
-import ProductCard from "../products/_component/ProductCard";
+// import ProductCard from "../../products/_component/ProductCard";
 import Link from "next/link";
+import ProductCard from "@/app/[locale]/products/_component/ProductCard";
 
 const ShopPage = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
