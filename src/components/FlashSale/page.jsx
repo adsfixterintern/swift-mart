@@ -177,6 +177,8 @@ const FlashSale = ({ lang = "en", currency = "BDT", exchangeRate = 120 }) => {
                 </div>
               ))}
         </div>
+        {/* Mobile View All Button */}
+        {/* Mobile View All Button */}
 
         {/* Mobile View All Button */}
         <Link
