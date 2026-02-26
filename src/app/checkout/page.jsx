@@ -1,118 +1,293 @@
 "use client";
-import React from "react";
+
+import React, { useState, useEffect } from "react";
+import dynamic from "next/dynamic";
 import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useSearchParams } from "next/navigation";
-import { CreditCard, Truck, ChevronRight, CheckCircle2 } from "lucide-react";
-import Image from "next/image";
+import * as z from "zod";
+import { useMapEvents } from "react-leaflet";
+import "leaflet/dist/leaflet.css";
+
+// Dynamic imports (NO hooks here)
+const MapContainer = dynamic(
+  () => import("react-leaflet").then((mod) => mod.MapContainer),
+  { ssr: false }
+);
+const TileLayer = dynamic(
+  () => import("react-leaflet").then((mod) => mod.TileLayer),
+  { ssr: false }
+);
+const Marker = dynamic(
+  () => import("react-leaflet").then((mod) => mod.Marker),
+  { ssr: false }
+);
+
+// ---------------- ZOD VALIDATION ----------------
+const checkoutSchema = z.object({
+  email: z.string().email("Enter valid email"),
+  phone: z
+    .string()
+    .regex(/^(?:\+88|88)?(01[3-9]\d{8})$/, "Valid BD phone required"),
+  firstName: z.string().min(2, "Min 2 characters"),
+  lastName: z.string().min(2, "Min 2 characters"),
+  address: z.string().min(10, "Enter full address"),
+  paymentMethod: z.enum(["cod"]),
+});
 
 export default function CheckoutPage() {
   const searchParams = useSearchParams();
-  
-  // Cart Page থেকে আসা ডাটা
+  const [currentStep, setCurrentStep] = useState(1);
+  const [position, setPosition] = useState([23.8103, 90.4125]);
+  const [addressLoading, setAddressLoading] = useState(false);
+
   const subtotal = searchParams.get("subtotal") || "0.00";
   const discount = searchParams.get("discount") || "0.00";
   const delivery = searchParams.get("delivery") || "0.00";
   const total = searchParams.get("total") || "0.00";
 
-  const { register, handleSubmit, watch, formState: { errors } } = useForm({
-    defaultValues: { paymentMethod: "cod" }
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    trigger,
+    watch,
+    formState: { errors },
+  } = useForm({
+    resolver: zodResolver(checkoutSchema),
+    defaultValues: { paymentMethod: "cod", address: "" },
   });
 
-  const selectedPayment = watch("paymentMethod");
+  const addressValue = watch("address");
+
+  // Fix Leaflet icon issue
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const L = require("leaflet");
+      delete L.Icon.Default.prototype._getIconUrl;
+      L.Icon.Default.mergeOptions({
+        iconRetinaUrl:
+          "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon-2x.png",
+        iconUrl:
+          "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png",
+        shadowUrl:
+          "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png",
+      });
+    }
+  }, []);
+
+  // Reverse Geocode
+  const fetchAddress = async (lat, lng) => {
+    setAddressLoading(true);
+    try {
+      const res = await fetch(
+        `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}`
+      );
+      const data = await res.json();
+      setValue("address", data.display_name || "", {
+        shouldValidate: true,
+      });
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setAddressLoading(false);
+    }
+  };
+
+  // Map Click Handler
+  function LocationMarker() {
+    useMapEvents({
+      click(e) {
+        const { lat, lng } = e.latlng;
+        setPosition([lat, lng]);
+        fetchAddress(lat, lng);
+      },
+    });
+
+    return <Marker position={position} />;
+  }
+
+  const handleNextStep = async () => {
+    const isValid = await trigger([
+      "email",
+      "phone",
+      "firstName",
+      "lastName",
+      "address",
+    ]);
+    if (isValid) setCurrentStep(2);
+  };
 
   const onSubmit = (data) => {
-    console.log("Order Data:", { ...data, amount: total });
+    console.log("Order Data:", {
+      ...data,
+      coordinates: position,
+    });
     alert("Order placed successfully!");
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-8 py-20 bg-white dark:bg-[#050505]">
-      <h1 className="section-title h1 mb-10 uppercase tracking-tighter">Checkout</h1>
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 py-16 px-4">
+      <div className="max-w-7xl mx-auto">
 
-      <form onSubmit={handleSubmit(onSubmit)} className="grid lg:grid-cols-12 gap-12">
-        
-        {/* Left Side */}
-        <div className="lg:col-span-7 space-y-8">
-          <section className="bg-white dark:bg-[#121212] p-6 rounded-2xl border border-gray-100 dark:border-gray-800">
-            <div className="flex items-center gap-2 mb-6 text-black dark:text-white">
-              <Truck size={22} />
-              <h2 className="text-xl font-bold uppercase italic">Shipping Details</h2>
-            </div>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <input {...register("firstName", { required: true })} placeholder="First Name" className="bg-[#F0F0F0] dark:bg-[#1e1e1e] rounded-full px-6 py-3 outline-none dark:text-white" />
-              <input {...register("lastName", { required: true })} placeholder="Last Name" className="bg-[#F0F0F0] dark:bg-[#1e1e1e] rounded-full px-6 py-3 outline-none dark:text-white" />
-              <input {...register("address", { required: true })} placeholder="Full Address" className="md:col-span-2 bg-[#F0F0F0] dark:bg-[#1e1e1e] rounded-full px-6 py-3 outline-none dark:text-white" />
-              <input {...register("phone", { required: true })} placeholder="Phone Number" className="md:col-span-2 bg-[#F0F0F0] dark:bg-[#1e1e1e] rounded-full px-6 py-3 outline-none dark:text-white" />
-            </div>
-          </section>
-
-          {/* Payment Method */}
-          <section className="bg-white dark:bg-[#121212] p-6 rounded-2xl border border-gray-100 dark:border-gray-800">
-            <div className="flex items-center gap-2 mb-6 text-black dark:text-white">
-              <CreditCard size={22} />
-              <h2 className="text-xl font-bold uppercase italic">Payment Method</h2>
-            </div>
-            
-            <div className="space-y-3">
-              {/* Cash on Delivery */}
-              <label className={`flex items-center justify-between p-4 rounded-2xl border cursor-pointer transition-all ${selectedPayment === 'cod' ? 'border-black dark:border-white bg-gray-50 dark:bg-white/5' : 'border-gray-200 dark:border-gray-800'}`}>
-                <div className="flex items-center gap-3">
-                  <input type="radio" {...register("paymentMethod")} value="cod" className="w-4 h-4 accent-black" />
-                  <span className="font-medium dark:text-white">Cash on Delivery</span>
-                </div>
-              </label>
-
-              {/* Online Payment */}
-              <label className={`flex items-center justify-between p-4 rounded-2xl border cursor-pointer transition-all ${selectedPayment === 'online' ? 'border-black dark:border-white bg-gray-50 dark:bg-white/5' : 'border-gray-200 dark:border-gray-800'}`}>
-                <div className="flex items-center gap-3">
-                  <input type="radio" {...register("paymentMethod")} value="online" className="w-4 h-4 accent-black" />
-                  <span className="font-medium dark:text-white">Online Payment (Instant)</span>
-                </div>
-              </label>
-
-              {/* Bkash/Nagad Options - Only shows when 'online' is selected */}
-              {selectedPayment === 'online' && (
-                <div className="grid grid-cols-2 gap-4 mt-4 p-4 bg-[#F0F0F0] dark:bg-[#1e1e1e] rounded-2xl animate-in fade-in slide-in-from-top-2">
-                  <label className="flex flex-col items-center gap-2 p-3 bg-white dark:bg-black rounded-xl border border-gray-200 dark:border-gray-700 cursor-pointer hover:border-pink-500 transition-colors">
-                    <input type="radio" {...register("gateway")} value="bkash" className="hidden peer" />
-                   <Image src="/PaymentGateway/bkash.png" alt="bkash" width={100} height={60} className="object-contain" />
-                  </label>
-                  <label className="flex flex-col items-center gap-2 p-3 bg-white dark:bg-black rounded-xl border border-gray-200 dark:border-gray-700 cursor-pointer hover:border-orange-500 transition-colors">
-                    <input type="radio" {...register("gateway")} value="nagad" className="hidden peer" />
-                    <Image src="/PaymentGateway/nagad.png" alt="nagad" width={100} height={60} className="object-contain" />
-                  </label>
-                </div>
-              )}
-            </div>
-          </section>
-        </div>
-
-        {/* Right Side: Summary */}
-        <div className="lg:col-span-5">
-          <div className="border border-gray-200 dark:border-gray-800 rounded-[20px] p-6 sticky top-24 bg-white dark:bg-[#121212]">
-            <h2 className="text-xl font-bold mb-6 uppercase text-black dark:text-white">Order Summary</h2>
-            
-            <div className="space-y-4 mb-6">
-              <div className="flex justify-between p-text"><span className="text-sm">Subtotal</span><span className="font-bold text-black dark:text-white">৳{subtotal}</span></div>
-              <div className="flex justify-between p-text"><span className="text-sm">Discount</span><span className="font-bold text-red-500">-৳{discount}</span></div>
-              <div className="flex justify-between p-text"><span className="text-sm">Delivery Fee</span><span className="font-bold text-black dark:text-white">৳{delivery}</span></div>
-              <hr className="border-gray-200 dark:border-gray-800" />
-              <div className="flex justify-between items-center text-xl text-black dark:text-white">
-                <span className="font-bold">Total</span>
-                <span className="font-black">৳{total}</span>
+        {/* STEP INDICATOR */}
+        <div className="flex items-center justify-center mb-14">
+          <div className="flex items-center gap-6">
+            <div className={`flex items-center gap-3 ${currentStep === 1 ? "opacity-100" : "opacity-40"}`}>
+              <div className="w-12 h-12 rounded-full flex items-center justify-center bg-black text-white font-bold text-lg">
+                1
               </div>
+              <span className="font-semibold">Shipping</span>
             </div>
 
-            <button type="submit" className="w-full btn-global py-4 text-lg shadow-lg">
-              Confirm Order
-            </button>
-            <div className="flex items-center justify-center gap-2 mt-4 text-green-600 text-xs font-medium">
-              <CheckCircle2 size={14} /> Secure Checkout
+            <div className="w-16 h-[2px] bg-gray-300"></div>
+
+            <div className={`flex items-center gap-3 ${currentStep === 2 ? "opacity-100" : "opacity-40"}`}>
+              <div className="w-12 h-12 rounded-full flex items-center justify-center border-2 border-black font-bold text-lg">
+                2
+              </div>
+              <span className="font-semibold">Payment</span>
             </div>
           </div>
         </div>
-      </form>
+
+        <form onSubmit={handleSubmit(onSubmit)} className="grid lg:grid-cols-12 gap-12">
+
+          {/* LEFT SIDE */}
+          <div className="lg:col-span-7 space-y-10">
+
+            {currentStep === 1 && (
+              <>
+                <div className="bg-white p-10 rounded-3xl shadow-xl border border-gray-100 space-y-6">
+
+                  <h2 className="text-2xl font-bold">Contact Information</h2>
+
+                  <div className="grid md:grid-cols-2 gap-6">
+                    <div>
+                      <input {...register("email")} placeholder="Email Address" className="premium-input" />
+                      {errors.email && <p className="error-text">{errors.email.message}</p>}
+                    </div>
+
+                    <div>
+                      <input {...register("phone")} placeholder="Phone Number" className="premium-input" />
+                      {errors.phone && <p className="error-text">{errors.phone.message}</p>}
+                    </div>
+                  </div>
+                </div>
+
+                <div className="bg-white p-10 rounded-3xl shadow-xl border border-gray-100 space-y-6">
+
+                  <h2 className="text-2xl font-bold">Shipping Address</h2>
+
+                  <div className="h-80 rounded-2xl overflow-hidden shadow-md">
+                    <MapContainer
+                      center={position}
+                      zoom={13}
+                      style={{ height: "100%", width: "100%" }}
+                    >
+                      <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+                      <LocationMarker />
+                    </MapContainer>
+                  </div>
+
+                  <textarea
+                    {...register("address")}
+                    value={addressValue}
+                    onChange={(e) =>
+                      setValue("address", e.target.value, { shouldValidate: true })
+                    }
+                    placeholder="Street address, apartment, etc."
+                    className="premium-input min-h-[120px]"
+                  />
+                  {addressLoading && <p className="text-sm text-gray-500">Fetching address...</p>}
+                  {errors.address && <p className="error-text">{errors.address.message}</p>}
+
+                  <div className="grid md:grid-cols-2 gap-6">
+                    <div>
+                      <input {...register("firstName")} placeholder="First Name" className="premium-input" />
+                      {errors.firstName && <p className="error-text">{errors.firstName.message}</p>}
+                    </div>
+
+                    <div>
+                      <input {...register("lastName")} placeholder="Last Name" className="premium-input" />
+                      {errors.lastName && <p className="error-text">{errors.lastName.message}</p>}
+                    </div>
+                  </div>
+
+                  <button
+                    type="button"
+                    onClick={handleNextStep}
+                    className="w-full bg-black text-white py-4 rounded-full font-semibold hover:scale-[1.02] active:scale-95 transition-all"
+                  >
+                    Continue to Payment
+                  </button>
+                </div>
+              </>
+            )}
+
+            {currentStep === 2 && (
+              <div className="bg-white p-10 rounded-3xl shadow-xl border border-gray-100 space-y-6">
+                <button
+                  type="button"
+                  onClick={() => setCurrentStep(1)}
+                  className="text-gray-500 hover:text-black"
+                >
+                  ← Back to Shipping
+                </button>
+
+                <h2 className="text-2xl font-bold">Payment Method</h2>
+
+                <label className="flex items-center justify-between p-6 border-2 rounded-2xl cursor-pointer hover:border-black transition-all">
+                  <div className="flex items-center gap-3">
+                    <input type="radio" {...register("paymentMethod")} value="cod" />
+                    <span className="font-medium">Cash on Delivery</span>
+                  </div>
+                </label>
+              </div>
+            )}
+          </div>
+
+          {/* RIGHT SUMMARY */}
+          <div className="lg:col-span-5">
+            <div className="bg-white p-10 rounded-3xl shadow-2xl border border-gray-100 sticky top-20 space-y-6">
+
+              <h2 className="text-2xl font-bold border-b pb-4">Order Summary</h2>
+
+              <div className="space-y-4 text-gray-600">
+                <div className="flex justify-between">
+                  <span>Subtotal</span>
+                  <span className="font-semibold text-black">৳{subtotal}</span>
+                </div>
+
+                <div className="flex justify-between text-red-500">
+                  <span>Discount</span>
+                  <span>-৳{discount}</span>
+                </div>
+
+                <div className="flex justify-between">
+                  <span>Delivery</span>
+                  <span className="font-semibold text-black">৳{delivery}</span>
+                </div>
+              </div>
+
+              <div className="flex justify-between text-3xl font-bold border-t pt-6">
+                <span>Total</span>
+                <span>৳{total}</span>
+              </div>
+
+              {currentStep === 2 && (
+                <button
+                  type="submit"
+                  className="w-full bg-black text-white py-5 rounded-full font-semibold hover:scale-[1.02] active:scale-95 transition-all"
+                >
+                  Place Order
+                </button>
+              )}
+            </div>
+          </div>
+
+        </form>
+      </div>
     </div>
   );
 }
