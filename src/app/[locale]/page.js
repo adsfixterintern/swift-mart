@@ -4,9 +4,14 @@ import Hero from "@/components/Home/Hero";
 import Image from "next/image";
 import Products from "./products/page";
 import ReviewSlider from "@/components/Home/ReviewSlider/ReviewSlider";
+<<<<<<< HEAD:src/app/page.js
 import TopSelling from "./topselling/page";
 import FlashSale from "@/components/FlashSale/page";
+=======
+import SpinWheelModal from "@/app/[locale]/SpinWheelModal/SpinWheelModal";
+>>>>>>> development:src/app/[locale]/page.js
 
+import TopSelling from "@/app/[locale]/topselling/page";
 export const metadata = {
   title: "Home",
   description: "Home Page",
@@ -16,6 +21,7 @@ export const metadata = {
 export default function Home() {
   return (
     <div>
+      <SpinWheelModal></SpinWheelModal>
       <Hero></Hero>
       <Brands></Brands>
       <Products></Products>

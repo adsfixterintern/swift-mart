@@ -37,24 +37,24 @@ export default function Footer() {
           {/* ===== 30% Brand Section ===== */}
           <div className="w-full md:w-[30%]">
             <h3 className="text-2xl font-extrabold mb-3">SwiftMart</h3>
-            <p className="text-gray-600 text-sm mb-4">
+            <p className="text-gray-600 dark:text-gray-200 text-sm mb-4">
               We have clothes that suits your style and which you&apos;re proud to
               wear. From women to men.
             </p>
 
             {/* Social Icons */}
             <div className="flex gap-3">
-              <div className="bg-white dark:bg-black p-2 rounded-full shadow-sm">
-                <Twitter size={16} className="dark:text-white" />
+              <div className="bg-white  p-2 rounded-full shadow-sm">
+                <Twitter size={16} className="dark:text-black" />
               </div>
-              <div className="bg-white dark:bg-black p-2 rounded-full shadow-sm">
-                <Facebook size={16} className="dark:text-white" />
+              <div className="bg-white p-2 rounded-full shadow-sm">
+                <Facebook size={16} className="dark:text-black" />
               </div>
-              <div className="bg-white dark:bg-black p-2 rounded-full shadow-sm">
-                <Instagram size={16} className="dark:text-white" />
+              <div className="bg-white  p-2 rounded-full shadow-sm">
+                <Instagram size={16} className="dark:text-black" />
               </div>
-              <div className="bg-white dark:bg-black p-2 rounded-full shadow-sm">
-                <Github size={16} className="dark:text-white" />
+              <div className="bg-white p-2 rounded-full shadow-sm">
+                <Github size={16} className="dark:text-black" />
               </div>
             </div>
           </div>
@@ -63,7 +63,7 @@ export default function Footer() {
           <div className="w-full md:w-[70%] grid grid-cols-2 md:grid-cols-4 gap-8">
             <div>
               <h4 className="font-semibold mb-3">COMPANY</h4>
-              <ul className="space-y-2 text-sm text-gray-600">
+              <ul className="space-y-2 text-sm text-gray-600 dark:text-gray-200">
                 <li>About</li>
                 <li>Features</li>
                 <li>Works</li>
@@ -73,7 +73,7 @@ export default function Footer() {
 
             <div>
               <h4 className="font-semibold mb-3">HELP</h4>
-              <ul className="space-y-2 text-sm text-gray-600">
+              <ul className="space-y-2 text-sm text-gray-600 dark:text-gray-200">
                 <li>Customer Support</li>
                 <li>Delivery Details</li>
                 <li>Terms & Conditions</li>
@@ -83,7 +83,7 @@ export default function Footer() {
 
             <div>
               <h4 className="font-semibold mb-3">FAQ</h4>
-              <ul className="space-y-2 text-sm text-gray-600">
+              <ul className="space-y-2 text-sm text-gray-600 dark:text-gray-200">
                 <li>Account</li>
                 <li>Manage Deliveries</li>
                 <li>Orders</li>
@@ -93,7 +93,7 @@ export default function Footer() {
 
             <div>
               <h4 className="font-semibold mb-3">RESOURCES</h4>
-              <ul className="space-y-2 text-sm text-gray-600">
+              <ul className="space-y-2 text-sm text-gray-600 dark:text-gray-200">
                 <li>Free eBooks</li>
                 <li>Development Tutorial</li>
                 <li>How to - Blog</li>
@@ -118,24 +118,28 @@ export default function Footer() {
               alt="visa"
               width={40}
               height={30}
+              className="bg-white p-1 rounded-sm"
             />
             <Image
               src="/PaymentGateway/Mastercard.png"
               alt="mastercard"
-              width={40}
+              width={30}
               height={30}
+              className="bg-white p-1 rounded-sm"
             />
             <Image
               src="/PaymentGateway/PayPal.svg.webp"
               alt="paypal"
-              width={40}
+              width={50}
               height={30}
+              className="bg-white p-1 rounded-sm"
             />
             <Image
               src="/PaymentGateway/apple.png"
               alt="applepay"
               width={20}
               height={20}
+              className="bg-white p-1 rounded-sm"
             />
           </div>
         </div>
