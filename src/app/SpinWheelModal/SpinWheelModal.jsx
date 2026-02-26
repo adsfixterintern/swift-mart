@@ -27,6 +27,8 @@ export default function SpinWheelModal() {
     }
   }, []);
 
+  // Spin the wheel and determine the reward
+
 const spinWheel = () => {
   if (isSpinning) return;
 
