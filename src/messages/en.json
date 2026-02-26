@@ -1,0 +1,9 @@
+{
+  "Navbar": {
+    "title": "SwiftMart",
+    "shop": "Shop",
+    "onSale": "On Sale",
+    "newArrivals": "New Arrivals",
+    "brands": "Brands"
+  }
+}
