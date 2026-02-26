@@ -52,6 +52,7 @@ export default function ReviewSlider() {
       
         <div className={styles.nav}>
           <button
+          className={styles.navdark}
             onClick={() =>
               setCurrent(
                 current === 0
@@ -60,7 +61,7 @@ export default function ReviewSlider() {
               )
             }
           >
-            ‹
+            ‹ 
           </button>
 
           <button
@@ -87,7 +88,7 @@ export default function ReviewSlider() {
           }}
         >
           {reviews.map((item) => (
-            <div key={item.id} className={styles.card}>
+            <div key={item.id} className={`${styles.card} bg-white dark:bg-gray-900`}>
               <div className={styles.stars}>
                 {"★".repeat(item.rating)}
                 {"☆".repeat(5 - item.rating)}
@@ -103,7 +104,7 @@ export default function ReviewSlider() {
                 )}
               </h4>
 
-              <p className={styles.review}>{item.review}</p>
+              <p className={`${styles.review} text-gray-500 dark:text-gray-200`}>{item.review}</p>
             </div>
           ))}
         </div>
