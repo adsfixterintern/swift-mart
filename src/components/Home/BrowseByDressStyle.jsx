@@ -6,7 +6,7 @@ export default function BrowseByDressStyle() {
       <div className="max-w-7xl mx-auto px-4">
         <div className="bg-primary rounded-[40px] p-10 md:p-14">
           <h2 className="section-title text-center mb-14">
-            BROWSE BY DRESS STYLE
+            <span className="dark:text-black">BROWSE BY DRESS STYLE</span>
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
@@ -22,7 +22,7 @@ export default function BrowseByDressStyle() {
               />
 
               {/* Text */}
-              <h3 className="absolute top-6 left-6 text-xl font-semibold z-10">
+              <h3 className="absolute top-6 left-6 text-xl font-semibold z-10 dark:text-black">
                 Casual
               </h3>
             </div>
@@ -35,7 +35,7 @@ export default function BrowseByDressStyle() {
                 fill
                 className="object-cover object-right scale-[1.6] translate-x-65 translate-y-16"
               />
-              <h3 className="absolute top-6 left-6 text-xl font-semibold">
+              <h3 className="absolute top-6 left-6 text-xl font-semibold dark:text-black">
                 Formal
               </h3>
             </div>
@@ -48,13 +48,13 @@ export default function BrowseByDressStyle() {
                 fill
                 className="object-cover object-right scale-[1.3] translate-x-12"
               />
-              <h3 className="absolute top-6 left-6 text-xl font-semibold">
+              <h3 className="absolute top-6 left-6 text-xl font-semibold dark:text-black">
                 Party
               </h3>
             </div>
 
             {/* Gym (smaller) */}
-            <div className="relative md:col-span-5 h-[260px] rounded-3xl overflow-hidden bg-white">
+            <div className="relative md:col-span-5 h-[260px] rounded-3xl overflow-hidden bg-white dark:text-black">
               <Image
                 src="/BrowseStyle/gym.png"
                 alt="Gym"
