@@ -1,10 +1,6 @@
-// /** @type {import('next').NextConfig} */
-// const nextConfig = {
-//   /* config options here */
-//   reactCompiler: true,
-// };
+import createNextIntlPlugin from 'next-intl/plugin';
 
-// export default nextConfig;
+const withNextIntl = createNextIntlPlugin();
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -31,15 +27,12 @@ const nextConfig = {
 
   // ✅ Experimental features (performance boost)
   experimental: {
-    optimizeCss: true,
     scrollRestoration: true
   },
-
-  // ✅ SWC minification (faster builds)
-  swcMinify: true,
 
   // ✅ Disable X-Powered-By header (security)
   poweredByHeader: false
 };
 
-export default nextConfig;
+// ✅ withNextIntl দিয়ে আপনার কনফিগকে র‍্যাপ (Wrap) করুন
+export default withNextIntl(nextConfig);
