@@ -22,6 +22,12 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+export const metadata = {
+  manifest: "/manifest.json",
+  themeColor: "#000000",
+};
+
+
 export function generateStaticParams() {
   return [{ locale: "en" }, { locale: "bn" }];
 }
