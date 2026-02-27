@@ -7,6 +7,7 @@ import ReviewSlider from "@/components/Home/ReviewSlider/ReviewSlider";
 import SpinWheelModal from "@/app/[locale]/SpinWheelModal/SpinWheelModal";
 
 import TopSelling from "@/app/[locale]/topselling/page";
+import FlashSale from "@/components/FlashSale/page";
 export const metadata = {
   title: "Home",
   description: "Home Page",
@@ -21,6 +22,7 @@ export default function Home() {
       <Brands></Brands>
       <Products></Products>
       <TopSelling></TopSelling>
+      <FlashSale></FlashSale>
       <BrowseByDressStyle></BrowseByDressStyle>
       <ReviewSlider></ReviewSlider>
     </div>
